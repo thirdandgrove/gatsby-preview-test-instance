@@ -26,7 +26,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-drupal`,
+      resolve: `gatsby-source-drupal-preview`,
       options: {
         baseUrl: "http://dev-gatsby-preview-test.pantheonsite.io",
       },
