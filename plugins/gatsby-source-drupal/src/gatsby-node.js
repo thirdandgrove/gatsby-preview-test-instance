@@ -22,7 +22,7 @@ exports.sourceNodes = async (
 
   // Fetch articles.
   // console.time(`fetch Drupal data`)
-  console.log(`Starting to fetch data from Drupal`)
+  console.log(`Starting to fetch data from Drupal from ${baseUrl}/${apiBase}`)
 
   // TODO restore this
   // let lastFetched
@@ -236,7 +236,7 @@ exports.sourceNodes = async (
 
   // listen for changes to nodes for preview mode
   if (process.env.NODE_ENV === "development") {
-    const port = 8081 // TODO: allow user to define port?
+    const port = 8080 // TODO: allow user to define port?
     const server = micro(async (req, res) => {
       const data = await micro.json(req)
       if (data.id) {
