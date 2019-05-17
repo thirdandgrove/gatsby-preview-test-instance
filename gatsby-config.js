@@ -1,5 +1,3 @@
-require("dotenv").config()
-
 module.exports = {
   siteMetadata: {
     title: `Gatsby Preview Test`,
@@ -30,7 +28,7 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: process.env.DRUPAL_URL,
+        baseUrl: "http://dev-gatsby-preview-test.pantheonsite.io",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
