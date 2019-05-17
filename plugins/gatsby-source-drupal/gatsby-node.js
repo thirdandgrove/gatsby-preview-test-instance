@@ -252,9 +252,10 @@ exports.sourceNodes = async ({
 
     const server = micro(async (req, res) => {
       const data = await micro.json(req);
+      const nodeToUpdate = JSON.parse(data).data;
 
-      if (data.id) {
-        const node = nodeFromData(data, createNodeId);
+      if (nodeToUpdate.id) {
+        const node = nodeFromData(nodeToUpdate, createNodeId);
         node.internal.contentDigest = createContentDigest(node);
         createNode(node);
         console.log("\x1b[32m", `Updated node: ${node.id}`);
@@ -262,6 +263,6 @@ exports.sourceNodes = async ({
 
       res.end("ok");
     });
-    server.listen(port, console.log("\x1b[32m", `listening for changes to nodes for live preview on port: ${port}`));
+    server.listen(port, console.log("\x1b[32m", `listening to changes for live preview on port: ${port}`));
   }
 };

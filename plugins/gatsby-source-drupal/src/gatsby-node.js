@@ -239,8 +239,9 @@ exports.sourceNodes = async (
     const port = 8080 // TODO: allow user to define port?
     const server = micro(async (req, res) => {
       const data = await micro.json(req)
-      if (data.id) {
-        const node = nodeFromData(data, createNodeId)
+      const nodeToUpdate = JSON.parse(data).data
+      if (nodeToUpdate.id) {
+        const node = nodeFromData(nodeToUpdate, createNodeId)
         node.internal.contentDigest = createContentDigest(node)
         createNode(node)
         console.log("\x1b[32m", `Updated node: ${node.id}`)
@@ -251,7 +252,7 @@ exports.sourceNodes = async (
       port,
       console.log(
         "\x1b[32m",
-        `listening for changes to nodes for live preview on port: ${port}`
+        `listening to changes for live preview on port: ${port}`
       )
     )
   }
