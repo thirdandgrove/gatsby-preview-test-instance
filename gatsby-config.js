@@ -1,3 +1,5 @@
+const proxy = require("http-proxy-middleware")
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Preview Test`,
@@ -31,8 +33,17 @@ module.exports = {
         baseUrl: "http://dev-gatsby-preview-test.pantheonsite.io",
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
+  developMiddleware: app => {
+    app.use(
+      "/.updatePreview/",
+      proxy({
+        target: "http://localhost:8080",
+        secure: false, // Do not reject self-signed certificates.
+        pathRewrite: {
+          "/.updatePreview/": "",
+        },
+      })
+    )
+  },
 }
