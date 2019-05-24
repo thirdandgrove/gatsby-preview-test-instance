@@ -28,11 +28,12 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-drupal-preview`,
+      resolve: `gatsby-source-drupal`,
       options: {
         baseUrl: "http://dev-gatsby-preview-test.pantheonsite.io",
       },
     },
+    `gatsby-plugin-preview`,
   ],
   developMiddleware: app => {
     app.use(
