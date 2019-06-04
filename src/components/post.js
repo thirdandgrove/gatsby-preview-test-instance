@@ -28,6 +28,7 @@ export default () => {
     }
   `)
 
+  console.log(data.nodeArticle)
   return (
     <header>
       <h1>{data.nodeArticle.title}</h1>
@@ -35,6 +36,16 @@ export default () => {
         src={data.nodeArticle.relationships.field_image.localFile.publicURL}
         alt="things here"
       />
+      <br />
+      <hr />
+      <span>
+        {data.nodeArticle.relationships.field_paragraph_content &&
+          data.nodeArticle.relationships.field_paragraph_content.map(field => (
+            <article
+              dangerouslySetInnerHTML={{ __html: field.field_text.processed }}
+            />
+          ))}
+      </span>
       <br />
       <hr />
       <span
