@@ -4216,17 +4216,17 @@ gatsby-react-router-scroll@^2.0.7:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
-gatsby-source-drupal-preview@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/gatsby-source-drupal-preview/-/gatsby-source-drupal-preview-0.0.2.tgz#8405da9344ae62421434f9028015d35f17939937"
-  integrity sha512-fYHhJL2/JOwazufc970yNWnknV/wBUSVWcFF+h/wSXfrE7/Cd3vDZWcujRLtT4z8pSM+DKcpD50XuNwOb6qn3A==
+gatsby-source-drupal-preview@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/gatsby-source-drupal-preview/-/gatsby-source-drupal-preview-0.0.8.tgz#d2db4103c1c1f2ef4f578769b5a9007fabef8140"
+  integrity sha512-SVsy8aep/EEdPvxZVQwiiiHnUrxO6p2KJQ4BTUMXLUAfH3p71CrFG0W/0OFSDI2dRC3AHdG/gNBS8ZFOQ5mRGw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     axios "^0.18.0"
     bluebird "^3.5.0"
     gatsby-source-filesystem "^2.0.32"
     lodash "^4.17.10"
-    micro "^9.3.3"
+    micro "^9.3.4"
 
 gatsby-source-filesystem@^2.0.29:
   version "2.0.29"
@@ -4250,9 +4250,9 @@ gatsby-source-filesystem@^2.0.29:
     xstate "^3.1.0"
 
 gatsby-source-filesystem@^2.0.32:
-  version "2.0.37"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.0.37.tgz#f1de0ab81809ce4c1fdd8cdfb573b1fd25731a8e"
-  integrity sha512-PKCpflGXyqOSqoMUNk++sEkBHEjqMGNlN4OZQ7qKH+Jkcp0dg/Ru4anyrz57veQKMO+UdHUV1pOJI6PnZY9YiA==
+  version "2.0.38"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.0.38.tgz#8f9c2b8c0f17d1f8c464c3488a14e15c62c6eca2"
+  integrity sha512-r7LNTSVtgFz0n4Ox0iDc8PkOSM8nja+ONkcvyFWSyV1KjnvQdcsxXbVZba0S+ngUp+R+wSFS/GGD2LqdV0mCVA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     better-queue "^3.8.7"
@@ -6108,7 +6108,7 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
-micro@^9.3.3:
+micro@^9.3.3, micro@^9.3.4:
   version "9.3.4"
   resolved "https://registry.yarnpkg.com/micro/-/micro-9.3.4.tgz#745a494e53c8916f64fb6a729f8cbf2a506b35ad"
   integrity sha512-smz9naZwTG7qaFnEZ2vn248YZq9XR+XoOH3auieZbkhDL4xLOxiE+KqG8qqnBeKfXA9c1uEFGCxPN1D+nT6N7w==

@@ -35,16 +35,4 @@ module.exports = {
       },
     },
   ],
-  developMiddleware: app => {
-    app.use(
-      "/.updatePreview/",
-      proxy({
-        target: "http://localhost:8080",
-        secure: false, // Do not reject self-signed certificates.
-        pathRewrite: {
-          "/.updatePreview/": "",
-        },
-      })
-    )
-  },
 }
