@@ -255,22 +255,21 @@ exports.sourceNodes = async ({
     const server = micro(async (req, res) => {
       const request = await micro.json(req);
       const nodeToUpdate = JSON.parse(request).data;
-      const node = nodeFromData(nodeToUpdate, createNodeId);
-      node.relationships = {}; // handle relationships ?? maybe ??
+      const node = nodeFromData(nodeToUpdate, createNodeId); // handle relationships ?? maybe ??
 
       if (nodeToUpdate.relationships) {
-        if (nodeToUpdate.relationships) {
-          Object.entries(nodeToUpdate.relationships).map(([v, k]) => {
-            if (!v.data) return;
+        _.each(nodeToUpdate.relationships, (v, k) => {
+          if (!v.data) return;
 
-            if (_.isArray(v.data) && v.data.length > 0) {
-              // Create array of all ids that are in our index
-              node.relationships[`${k}___NODE`] = _.compact(v.data.map(data => ids[data.id] ? createNodeId(data.id) : null));
-            } else if (ids[v.data.id]) {
-              node.relationships[`${k}___NODE`] = createNodeId(v.data.id);
-            }
-          });
-        }
+          if (_.isArray(v.data) && v.data.length > 0) {
+            // Create array of all ids that are in our index
+            v.data.forEach(data => addBackRef(data.id, datum));
+            node.relationships[`${k}___NODE`] = _.compact(v.data.map(data => ids[data.id] ? createNodeId(data.id) : null));
+          } else if (ids[v.data.id]) {
+            addBackRef(v.data.id, datum);
+            node.relationships[`${k}___NODE`] = createNodeId(v.data.id);
+          }
+        });
       }
 
       node.internal.contentDigest = createContentDigest(node);
