@@ -260,13 +260,15 @@ exports.sourceNodes = async ({
 
       if (nodeToUpdate.relationships) {
         _.each(nodeToUpdate.relationships, (v, k) => {
-          console.log({
-            [v]: k
-          }, { ...v
-          });
           if (!v.data) return;
 
           if (_.isArray(v.data) && v.data.length > 0) {
+            // handle file downloads
+            if (k === "file--file") {
+              console.log({ ...k
+              });
+            }
+
             v.data.forEach(data => addBackRef(data.id, nodeToUpdate));
             node.relationships[`${k}___NODE`] = _.compact(v.data.map(data => ids[data.id] ? createNodeId(data.id) : null));
           } else if (ids[v.data.id]) {
