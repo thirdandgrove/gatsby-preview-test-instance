@@ -264,7 +264,7 @@ exports.sourceNodes = async ({
 
           if (_.isArray(v.data) && v.data.length > 0) {
             // handle file downloads
-            if (k.type === "file--file") {
+            if (v.data.type === "file--file") {
               console.log({ ...k
               });
             }
