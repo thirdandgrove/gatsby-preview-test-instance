@@ -245,7 +245,7 @@ exports.sourceNodes = async (
       const node = nodeFromData(nodeToUpdate, createNodeId)
       // handle relationships ?? maybe ??
       if (nodeToUpdate.relationships) {
-        console.log(node)
+        console.log("node:", node)
         _.each(nodeToUpdate.relationships, (v, k) => {
           if (!v.data) return
           if (_.isArray(v.data) && v.data.length > 0) {
