@@ -264,7 +264,7 @@ exports.sourceNodes = async ({
 
           if (_.isArray(value.data) && value.data.length > 0) {
             value.data.forEach(data => addBackRef(data.id, nodeToUpdate));
-            node.relationships[`${key}___NODE`] = _.compact(value.data.map(data => ids[data.id] ? createNodeId(data.id) : null));
+            node.relationships[`${key}___NODE`] = _.compact(value.data.map(data => createNodeId(data.id)));
           } else if (ids[value.data.id]) {
             addBackRef(value.data.id, nodeToUpdate);
             node.relationships[`${key}___NODE`] = createNodeId(value.data.id);
