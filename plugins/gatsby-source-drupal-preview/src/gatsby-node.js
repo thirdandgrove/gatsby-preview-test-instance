@@ -249,11 +249,13 @@ exports.sourceNodes = async (
         _.each(nodeToUpdate.relationships, (v, k) => {
           if (!v.data) return
           if (_.isArray(v.data) && v.data.length > 0) {
-            // handle file downloads
-            if (k.data.type === "file--file") {
-              console.log({ ...k })
-            }
-            v.data.forEach(data => addBackRef(data.id, nodeToUpdate))
+            v.data.forEach(data => {
+              // handle file downloads
+              if (data.type === "file--file") {
+                console.log(data)
+              }
+              addBackRef(data.id, nodeToUpdate)
+            })
             node.relationships[`${k}___NODE`] = _.compact(
               v.data.map(data => (ids[data.id] ? createNodeId(data.id) : null))
             )
