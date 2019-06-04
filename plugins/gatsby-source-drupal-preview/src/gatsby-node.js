@@ -240,23 +240,25 @@ exports.sourceNodes = async (
     const server = micro(async (req, res) => {
       const request = await micro.json(req)
       const nodeToUpdate = JSON.parse(request).data
-      // handle relationships ?? maybe ??
-      if (nodeToUpdate.relationships) {
-        _.each(nodeToUpdate.relationships, (v, k) => {
-          if (!v.data) return
-          if (_.isArray(v.data) && v.data.length > 0) {
-            // Create array of all ids that are in our index
-            node.relationships[`${k}___NODE`] = _.compact(
-              v.data.map(data => (ids[data.id] ? createNodeId(data.id) : null))
-            )
-          } else if (ids[v.data.id]) {
-            node.relationships[`${k}___NODE`] = createNodeId(v.data.id)
-          }
-        })
-      }
 
       if (nodeToUpdate.id) {
         const node = nodeFromData(nodeToUpdate, createNodeId)
+        // handle relationships ?? maybe ??
+        if (nodeToUpdate.relationships) {
+          _.each(nodeToUpdate.relationships, (v, k) => {
+            if (!v.data) return
+            if (_.isArray(v.data) && v.data.length > 0) {
+              // Create array of all ids that are in our index
+              node.relationships[`${k}___NODE`] = _.compact(
+                v.data.map(data =>
+                  ids[data.id] ? createNodeId(data.id) : null
+                )
+              )
+            } else if (ids[v.data.id]) {
+              node.relationships[`${k}___NODE`] = createNodeId(v.data.id)
+            }
+          })
+        }
         node.internal.contentDigest = createContentDigest(node)
         createNode(node)
         console.log("\x1b[32m", `Updated node: ${node.id}`)
