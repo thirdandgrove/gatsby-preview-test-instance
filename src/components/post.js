@@ -4,10 +4,17 @@ import { useStaticQuery, graphql } from "gatsby"
 export default () => {
   const data = useStaticQuery(graphql`
     query ArticleQuery {
-      nodeArticle {
+      nodeArticle(drupal_id: { eq: "7ff16353-c43f-4c84-b631-324d70470fa7" }) {
         id
         title
         relationships {
+          field_paragraph_content {
+            ... on paragraph__text {
+              field_text {
+                processed
+              }
+            }
+          }
           field_image {
             localFile {
               publicURL
