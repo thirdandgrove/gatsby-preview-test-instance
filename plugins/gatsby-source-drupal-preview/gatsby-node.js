@@ -255,7 +255,8 @@ exports.sourceNodes = async ({
     const server = micro(async (req, res) => {
       const request = await micro.json(req);
       const nodeToUpdate = JSON.parse(request).data;
-      const node = nodeFromData(nodeToUpdate, createNodeId); // handle relationships ?? maybe ??
+      const node = nodeFromData(nodeToUpdate, createNodeId);
+      node.relationships = {}; // handle relationships ?? maybe ??
 
       if (nodeToUpdate.relationships) {
         _.each(nodeToUpdate.relationships, (v, k) => {

@@ -243,6 +243,7 @@ exports.sourceNodes = async (
       const nodeToUpdate = JSON.parse(request).data
 
       const node = nodeFromData(nodeToUpdate, createNodeId)
+      node.relationships = {}
       // handle relationships ?? maybe ??
       if (nodeToUpdate.relationships) {
         _.each(nodeToUpdate.relationships, (v, k) => {
