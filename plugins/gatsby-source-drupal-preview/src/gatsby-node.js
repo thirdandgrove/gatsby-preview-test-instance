@@ -244,12 +244,12 @@ exports.sourceNodes = async (
 
       const node = nodeFromData(nodeToUpdate, createNodeId)
       node.relationships = {}
-      // handle relationships ?? maybe ??
+      // handle relationships
       if (nodeToUpdate.relationships) {
         _.each(nodeToUpdate.relationships, (v, k) => {
+          console.log({ v: k })
           if (!v.data) return
           if (_.isArray(v.data) && v.data.length > 0) {
-            // Create array of all ids that are in our index
             v.data.forEach(data => addBackRef(data.id, nodeToUpdate))
             node.relationships[`${k}___NODE`] = _.compact(
               v.data.map(data => (ids[data.id] ? createNodeId(data.id) : null))

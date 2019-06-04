@@ -256,14 +256,16 @@ exports.sourceNodes = async ({
       const request = await micro.json(req);
       const nodeToUpdate = JSON.parse(request).data;
       const node = nodeFromData(nodeToUpdate, createNodeId);
-      node.relationships = {}; // handle relationships ?? maybe ??
+      node.relationships = {}; // handle relationships
 
       if (nodeToUpdate.relationships) {
         _.each(nodeToUpdate.relationships, (v, k) => {
+          console.log({
+            v: k
+          });
           if (!v.data) return;
 
           if (_.isArray(v.data) && v.data.length > 0) {
-            // Create array of all ids that are in our index
             v.data.forEach(data => addBackRef(data.id, nodeToUpdate));
             node.relationships[`${k}___NODE`] = _.compact(v.data.map(data => ids[data.id] ? createNodeId(data.id) : null));
           } else if (ids[v.data.id]) {
