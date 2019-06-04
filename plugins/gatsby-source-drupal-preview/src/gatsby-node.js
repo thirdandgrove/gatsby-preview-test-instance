@@ -249,12 +249,12 @@ exports.sourceNodes = async (
           if (!v.data) return
           if (_.isArray(v.data) && v.data.length > 0) {
             // Create array of all ids that are in our index
-            v.data.forEach(data => addBackRef(data.id, datum))
+            v.data.forEach(data => addBackRef(data.id, nodeToUpdate))
             node.relationships[`${k}___NODE`] = _.compact(
               v.data.map(data => (ids[data.id] ? createNodeId(data.id) : null))
             )
           } else if (ids[v.data.id]) {
-            addBackRef(v.data.id, datum)
+            addBackRef(v.data.id, nodeToUpdate)
             node.relationships[`${k}___NODE`] = createNodeId(v.data.id)
           }
         })
