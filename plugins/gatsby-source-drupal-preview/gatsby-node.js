@@ -259,22 +259,19 @@ exports.sourceNodes = async ({
       node.relationships = {}; // handle relationships
 
       if (nodeToUpdate.relationships) {
-        _.each(nodeToUpdate.relationships, (v, k) => {
-          if (!v.data) return;
+        _.each(nodeToUpdate.relationships, (value, key) => {
+          if (!value.data) return;
 
-          if (_.isArray(v.data) && v.data.length > 0) {
-            v.data.forEach(data => {
-              // handle file downloads
-              if (data.type === "file--file") {
-                console.log(data);
-              }
+          if (_.isArray(value.data) && value.data.length > 0) {
+            value.data.forEach(data => addBackRef(data.id, nodeToUpdate));
+            node.relationships[`${key}___NODE`] = _.compact(value.data.map(data => ids[data.id] ? createNodeId(data.id) : null));
+          } else if (ids[value.data.id]) {
+            addBackRef(value.data.id, nodeToUpdate);
+            node.relationships[`${key}___NODE`] = createNodeId(v.data.id);
+          }
 
-              addBackRef(data.id, nodeToUpdate);
-            });
-            node.relationships[`${k}___NODE`] = _.compact(v.data.map(data => ids[data.id] ? createNodeId(data.id) : null));
-          } else if (ids[v.data.id]) {
-            addBackRef(v.data.id, nodeToUpdate);
-            node.relationships[`${k}___NODE`] = createNodeId(v.data.id);
+          if (value.type === "file--file") {
+            console.log("file node found", value);
           }
         });
       }
