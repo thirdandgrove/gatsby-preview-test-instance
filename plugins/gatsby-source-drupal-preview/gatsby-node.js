@@ -261,7 +261,8 @@ exports.sourceNodes = async ({
       if (nodeToUpdate.relationships) {
         _.each(nodeToUpdate.relationships, (v, k) => {
           console.log({
-            v: k
+            [v]: k
+          }, { ...v
           });
           if (!v.data) return;
 

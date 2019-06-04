@@ -247,7 +247,7 @@ exports.sourceNodes = async (
       // handle relationships
       if (nodeToUpdate.relationships) {
         _.each(nodeToUpdate.relationships, (v, k) => {
-          console.log({ v: k })
+          console.log({ [v]: k }, { ...v })
           if (!v.data) return
           if (_.isArray(v.data) && v.data.length > 0) {
             v.data.forEach(data => addBackRef(data.id, nodeToUpdate))
