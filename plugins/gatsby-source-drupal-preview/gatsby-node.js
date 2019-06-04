@@ -267,7 +267,7 @@ exports.sourceNodes = async ({
             node.relationships[`${key}___NODE`] = _.compact(value.data.map(data => ids[data.id] ? createNodeId(data.id) : null));
           } else if (ids[value.data.id]) {
             addBackRef(value.data.id, nodeToUpdate);
-            node.relationships[`${key}___NODE`] = createNodeId(v.data.id);
+            node.relationships[`${key}___NODE`] = createNodeId(value.data.id);
           }
 
           if (value.type === "file--file") {
