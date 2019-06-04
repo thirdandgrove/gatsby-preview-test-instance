@@ -257,7 +257,7 @@ exports.sourceNodes = async (
             )
           } else if (ids[value.data.id]) {
             addBackRef(value.data.id, nodeToUpdate)
-            node.relationships[`${key}___NODE`] = createNodeId(v.data.id)
+            node.relationships[`${key}___NODE`] = createNodeId(value.data.id)
           }
           if (value.type === "file--file") {
             console.log("file node found", value)
