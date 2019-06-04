@@ -7,13 +7,6 @@ export default () => {
       nodeArticle {
         id
         title
-        relationships {
-          # field_image {
-          #   localFile {
-          #     publicURL
-          #   }
-          # }
-        }
         body {
           processed
         }
