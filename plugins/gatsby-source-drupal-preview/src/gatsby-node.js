@@ -246,18 +246,21 @@ exports.sourceNodes = async (
       node.relationships = {}
       // handle relationships ?? maybe ??
       if (nodeToUpdate.relationships) {
-        console.log("node:", node)
-        _.each(nodeToUpdate.relationships, (v, k) => {
-          if (!v.data) return
-          if (_.isArray(v.data) && v.data.length > 0) {
-            // Create array of all ids that are in our index
-            node.relationships[`${k}___NODE`] = _.compact(
-              v.data.map(data => (ids[data.id] ? createNodeId(data.id) : null))
-            )
-          } else if (ids[v.data.id]) {
-            node.relationships[`${k}___NODE`] = createNodeId(v.data.id)
-          }
-        })
+        if (nodeToUpdate.relationships) {
+          Object.entries(nodeToUpdate.relationships).map(([v, k]) => {
+            if (!v.data) return
+            if (_.isArray(v.data) && v.data.length > 0) {
+              // Create array of all ids that are in our index
+              node.relationships[`${k}___NODE`] = _.compact(
+                v.data.map(data =>
+                  ids[data.id] ? createNodeId(data.id) : null
+                )
+              )
+            } else if (ids[v.data.id]) {
+              node.relationships[`${k}___NODE`] = createNodeId(v.data.id)
+            }
+          })
+        }
       }
       node.internal.contentDigest = createContentDigest(node)
       createNode(node)
