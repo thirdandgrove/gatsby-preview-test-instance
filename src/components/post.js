@@ -7,6 +7,13 @@ export default () => {
       nodeArticle {
         id
         title
+        relationships {
+          field_image {
+            localFile {
+              publicURL
+            }
+          }
+        }
         body {
           processed
         }
@@ -17,10 +24,10 @@ export default () => {
   return (
     <header>
       <h1>{data.nodeArticle.title}</h1>
-      {/* <img
+      <img
         src={data.nodeArticle.relationships.field_image.localFile.publicURL}
         alt="things here"
-      /> */}
+      />
       <br />
       <hr />
       <span
