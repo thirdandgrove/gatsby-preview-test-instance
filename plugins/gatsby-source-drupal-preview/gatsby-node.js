@@ -270,6 +270,17 @@ exports.sourceNodes = async ({
             node.relationships[`${key}___NODE`] = createNodeId(value.data.id);
           }
         });
+      } // handle backRefs
+
+
+      if (backRefs[nodeToUpdate.id]) {
+        backRefs[nodeToUpdate.id].forEach(ref => {
+          if (!node.relationships[`${ref.type}___NODE`]) {
+            node.relationships[`${ref.type}___NODE`] = [];
+          }
+
+          node.relationships[`${ref.type}___NODE`].push(createNodeId(ref.id));
+        });
       } // handle file downloads
 
 
@@ -305,7 +316,6 @@ exports.sourceNodes = async ({
 
         if (fileNode) {
           node.localFile___NODE = fileNode.id;
-          console.log("added remote file node:", fileNode);
         }
       }
 
