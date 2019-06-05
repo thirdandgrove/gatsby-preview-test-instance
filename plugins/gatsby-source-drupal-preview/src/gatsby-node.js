@@ -253,7 +253,7 @@ exports.sourceNodes = async (
             node.relationships[`${key}___NODE`] = _.compact(
               value.data.map(data => createNodeId(data.id))
             )
-          } else if (ids[value.data.id]) {
+          } else {
             addBackRef(value.data.id, nodeToUpdate)
             node.relationships[`${key}___NODE`] = createNodeId(value.data.id)
           }
@@ -308,6 +308,7 @@ exports.sourceNodes = async (
           node.localFile___NODE = fileNode.id
         }
       }
+
       node.internal.contentDigest = createContentDigest(node)
       createNode(node)
       console.log("\x1b[32m", `Updated node: ${node.id}`)
