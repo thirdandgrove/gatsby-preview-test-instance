@@ -260,6 +260,7 @@ exports.sourceNodes = async (
         })
       }
       // handle file downloads
+      let fileNode
       if (
         node.internal.type === `files` ||
         node.internal.type === `file__file`
