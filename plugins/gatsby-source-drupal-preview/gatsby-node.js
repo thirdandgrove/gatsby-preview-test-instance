@@ -305,6 +305,7 @@ exports.sourceNodes = async ({
 
         if (fileNode) {
           node.localFile___NODE = fileNode.id;
+          console.log("added remote file node:", fileNode);
         }
       }
 
