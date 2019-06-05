@@ -322,6 +322,7 @@ exports.sourceNodes = async ({
       node.internal.contentDigest = createContentDigest(node);
       createNode(node);
       console.log("\x1b[32m", `Updated node: ${node.id}`);
+      console.log("\x1b[32m", `Relationships: ${JSON.stringify(node.relationships)}`);
       res.end("ok");
     });
     server.listen(8080, console.log("\x1b[32m", `listening to changes for live preview at route /___updatePreview`));
