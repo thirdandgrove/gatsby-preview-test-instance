@@ -7,7 +7,7 @@ exports.createPages = async ({ actions, graphql }) => {
     {
       allNodeArticle {
         nodes {
-          drupal_id
+          id
           title
           path {
             alias
@@ -22,7 +22,7 @@ exports.createPages = async ({ actions, graphql }) => {
       path: nodeData.path.alias,
       component: path.resolve(`src/components/post.js`),
       context: {
-        DrupalId: nodeData.drupal_id,
+        ID: nodeData.id,
       },
     })
   )

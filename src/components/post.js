@@ -46,8 +46,8 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-  query($DrupalId: String!) {
-    nodeArticle(drupal_id: { eq: $DrupalId }) {
+  query($ID: String!) {
+    nodeArticle(id: { eq: $ID }) {
       id
       title
       relationships {
