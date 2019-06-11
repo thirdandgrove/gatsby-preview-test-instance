@@ -280,22 +280,16 @@ exports.sourceNodes = async ({
 
       if (nodeToUpdate.relationships) {
         _.each(nodeToUpdate.relationships, (value, key) => {
-          if (!value.data) return;
+          if (!value.data || _.isArray(value.data) && !value.data.length) return;
 
           if (_.isArray(value.data) && value.data.length > 0) {
             value.data.forEach(data => addBackRef(data.id, nodeToUpdate));
             node.relationships[`${key}___NODE`] = _.compact(value.data.map(data => {
-              // guard against undefined node ids
-              return data.id && createNodeId(data.id);
+              return createNodeId(data.id);
             }));
           } else {
-            if (!value.data.id) {
-              console.log("possibly bad node id", value.data);
-            } // guards against undefined node ids
-
-
-            value.data.id && addBackRef(value.data.id, nodeToUpdate);
-            node.relationships[`${key}___NODE`] = value.data.id && createNodeId(value.data.id);
+            addBackRef(value.data.id, nodeToUpdate);
+            node.relationships[`${key}___NODE`] = createNodeId(value.data.id);
           }
         });
       } // handle backRefs
