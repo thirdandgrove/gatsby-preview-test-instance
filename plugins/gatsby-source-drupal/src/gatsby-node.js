@@ -289,9 +289,12 @@ exports.sourceNodes = async (
               })
             )
           } else {
-            console.log("single ref id", value.data.id)
-            addBackRef(value.data.id, nodeToUpdate)
-            node.relationships[`${key}___NODE`] = createNodeId(value.data.id)
+            if (value.data.id === "undefined") {
+              console.log("possibly bad node id", value.data)
+            }
+            value.data.id && addBackRef(value.data.id, nodeToUpdate)
+            node.relationships[`${key}___NODE`] =
+              value.data.id && createNodeId(value.data.id)
           }
         })
       }
