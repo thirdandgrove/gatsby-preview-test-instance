@@ -275,7 +275,6 @@ exports.sourceNodes = async ({
     const server = micro(async (req, res) => {
       const request = await micro.json(req);
       const nodeToUpdate = JSON.parse(request).data;
-      console.log("node to update", nodeToUpdate);
       const node = nodeFromData(nodeToUpdate, createNodeId);
       node.relationships = {}; // handle relationships
 
@@ -285,8 +284,12 @@ exports.sourceNodes = async ({
 
           if (_.isArray(value.data) && value.data.length > 0) {
             value.data.forEach(data => addBackRef(data.id, nodeToUpdate));
-            node.relationships[`${key}___NODE`] = _.compact(value.data.map(data => createNodeId(data.id)));
+            node.relationships[`${key}___NODE`] = _.compact(value.data.map(data => {
+              console.log("values map ids:", data.id);
+              return createNodeId(data.id);
+            }));
           } else {
+            console.log("single ref id", value.data.id);
             addBackRef(value.data.id, nodeToUpdate);
             node.relationships[`${key}___NODE`] = createNodeId(value.data.id);
           }
@@ -296,6 +299,8 @@ exports.sourceNodes = async ({
 
       if (backRefs[nodeToUpdate.id]) {
         backRefs[nodeToUpdate.id].forEach(ref => {
+          console.log("backref ids", ref.id);
+
           if (!node.relationships[`${ref.type}___NODE`]) {
             node.relationships[`${ref.type}___NODE`] = [];
           }
