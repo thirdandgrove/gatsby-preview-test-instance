@@ -1,7 +1,29 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const path = require("path")
 
-// You can delete this file if you're not using it
+exports.createPages = async ({ actions, graphql }) => {
+  const { createPage } = actions
+
+  const studies = await graphql(`
+    {
+      allNodeArticle {
+        nodes {
+          drupal_id
+          title
+          path {
+            alias
+          }
+        }
+      }
+    }
+  `)
+
+  studies.data.allNodeArticle.nodes.map(nodeData =>
+    createPage({
+      path: nodeData.path.alias,
+      component: path.resolve(`src/components/post.js`),
+      context: {
+        DrupalId: nodeData.drupal_id,
+      },
+    })
+  )
+}
