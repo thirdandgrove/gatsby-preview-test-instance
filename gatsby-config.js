@@ -1,4 +1,5 @@
 const proxy = require("http-proxy-middleware")
+require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
@@ -28,9 +29,9 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-drupal`,
+      resolve: `gatsby-source-drupal-preview`,
       options: {
-        baseUrl: "http://dev-gatsby-preview-test.pantheonsite.io",
+        baseUrl: process.env.DRUPAL_URL,
         preview: true,
       },
     },

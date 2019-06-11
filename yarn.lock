@@ -4249,10 +4249,10 @@ gatsby-react-router-scroll@^2.0.7:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
-gatsby-source-drupal-preview@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/gatsby-source-drupal-preview/-/gatsby-source-drupal-preview-0.1.9.tgz#cc940e096a73573b9ac6ccf60025275c9fd8dff1"
-  integrity sha512-faq24ZW/6+vXqyj3r4L1ejip4R5v0GAPpqE4r6g1FSzNIBAfp6bjEU6NxKykxoOOaFj2HmVZqVMPjelgyWTbZg==
+gatsby-source-drupal-preview@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-drupal-preview/-/gatsby-source-drupal-preview-0.2.0.tgz#38b4012df3bd67e5b09c8794d73971e0b57352cb"
+  integrity sha512-3VGPIoxcswUFiIJ0NpDkkm4IFIxlyWvzP1fVu7b3HspaGMIg9LDmHL7/rTOjjaB3MtE4D+EVCzno2DDOG/6UXQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     axios "^0.18.0"
