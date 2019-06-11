@@ -284,14 +284,15 @@ exports.sourceNodes = async (
             value.data.forEach(data => addBackRef(data.id, nodeToUpdate))
             node.relationships[`${key}___NODE`] = _.compact(
               value.data.map(data => {
-                console.log("values map ids:", data.id)
-                return createNodeId(data.id)
+                // guard against undefined node ids
+                return data.id && createNodeId(data.id)
               })
             )
           } else {
-            if (value.data.id === "undefined") {
+            if (!value.data.id) {
               console.log("possibly bad node id", value.data)
             }
+            // guards against undefined node ids
             value.data.id && addBackRef(value.data.id, nodeToUpdate)
             node.relationships[`${key}___NODE`] =
               value.data.id && createNodeId(value.data.id)
@@ -301,11 +302,12 @@ exports.sourceNodes = async (
       // handle backRefs
       if (backRefs[nodeToUpdate.id]) {
         backRefs[nodeToUpdate.id].forEach(ref => {
-          console.log("backref ids", ref.id)
           if (!node.relationships[`${ref.type}___NODE`]) {
             node.relationships[`${ref.type}___NODE`] = []
           }
-          node.relationships[`${ref.type}___NODE`].push(createNodeId(ref.id))
+          // guard against undefined node ids
+          ref.id &&
+            node.relationships[`${ref.type}___NODE`].push(createNodeId(ref.id))
         })
       }
 
